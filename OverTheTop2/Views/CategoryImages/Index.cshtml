@@ -1,0 +1,32 @@
+﻿@model IEnumerable<OverTheTop2.Models.CategoryImage>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="card shadow">
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    <img src="@Url.Content(item.Image)" />
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</div>

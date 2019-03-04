@@ -1,0 +1,37 @@
+﻿@model OverTheTop2.Models.SubCategory
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="row card shadow">
+    <div class="col-md-12">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>
+                    @Html.DisplayFor(model => model.Name)
+                </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 ">
+                <h3>Before</h3>
+                <img src="@Url.Content(Model.Beforeimg)"/>
+            </div>
+            <div class="col-md-6 ">
+                <h3>After</h3>
+                <img src="@Url.Content(Model.Afterimg)"/>
+            </div>
+        </div>
+
+        <div class="row">
+            @foreach (var img in Model.SubCategoryImages)
+            {
+                <div class="col-md-4">
+                    <img src="@Url.Content(img.directory)"/>
+                </div>
+            }
+        </div>
+    </div>  
+</div>
