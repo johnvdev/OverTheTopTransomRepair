@@ -35,5 +35,8 @@ namespace OverTheTop2.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<OverTheTop2.Models.SubCategoryImage> SubCategoryImages { get; set; }
+
     }
 }

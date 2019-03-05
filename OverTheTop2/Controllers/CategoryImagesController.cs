@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using OverTheTop2.Models;
+using OverTheTop2.ViewModels;
 
 namespace OverTheTop2.Controllers
 {
@@ -17,105 +18,75 @@ namespace OverTheTop2.Controllers
         // GET: CategoryImages
         public ActionResult Index(int id)
         {
+          
             var cat = db.Categories.Include(c => c.CategoryImages).Single(i =>i.id == id);
-            var imgs = cat.CategoryImages;
-            return View(imgs);
+            return View(cat);
         }
 
-        // GET: CategoryImages/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CategoryImage categoryImage = db.CategoryImages.Find(id);
-            if (categoryImage == null)
-            {
-                return HttpNotFound();
-            }
-            return View(categoryImage);
-        }
 
         // GET: CategoryImages/Create
-        public ActionResult Create()
+        public ActionResult Create(int id)
         {
-            return View();
+            return View(db.Categories.Single(i=>i.id == id));
         }
 
-        // POST: CategoryImages/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Image")] CategoryImage categoryImage)
+        public ActionResult MyUpload(IEnumerable<HttpPostedFileBase> myFiles, int id)
         {
-            if (ModelState.IsValid)
+
+            Category category = db.Categories.Include(i => i.CategoryImages).Single(i => i.id == id);
+
+
+            foreach (var file in myFiles)
             {
-                db.CategoryImages.Add(categoryImage);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (file != null && file.ContentLength > 0)
+                {
+                    var fileName = file.FileName;
+                    var path = Server.MapPath("~/Images/CategoryImages")+ "/"+fileName;
+
+                    file.SaveAs(path);
+
+
+                    CategoryImage newImg = new CategoryImage()
+                    {
+                        Image = "~/Images/CategoryImages/"+file.FileName
+                    };
+                    
+                    category.CategoryImages.Add(newImg);
+
+                    
+
+                    //handle files;
+                }
             }
 
-            return View(categoryImage);
+            db.SaveChanges();
+            return RedirectToAction("Index","CategoryImages", new{id = id});
         }
 
-        // GET: CategoryImages/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CategoryImage categoryImage = db.CategoryImages.Find(id);
-            if (categoryImage == null)
-            {
-                return HttpNotFound();
-            }
-            return View(categoryImage);
-        }
 
-        // POST: CategoryImages/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Image")] CategoryImage categoryImage)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(categoryImage).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(categoryImage);
-        }
 
         // GET: CategoryImages/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int? imgId, int catId)
         {
-            if (id == null)
+            if (imgId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CategoryImage categoryImage = db.CategoryImages.Find(id);
+            CategoryImage categoryImage = db.CategoryImages.Find(imgId);
             if (categoryImage == null)
             {
                 return HttpNotFound();
             }
-            return View(categoryImage);
-        }
 
-        // POST: CategoryImages/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            CategoryImage categoryImage = db.CategoryImages.Find(id);
             db.CategoryImages.Remove(categoryImage);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            System.IO.File.Delete(Server.MapPath(categoryImage.Image));
+
+            return RedirectToAction("Index","CategoryImages",new{id=catId});
         }
+
 
         protected override void Dispose(bool disposing)
         {

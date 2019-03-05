@@ -179,6 +179,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\SubCategoryController.cs" />
+    <Compile Include="Controllers\SubCategoryImagesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -197,6 +198,18 @@
     <Compile Include="Migrations\201903040326035_SeedUsers.cs" />
     <Compile Include="Migrations\201903040326035_SeedUsers.Designer.cs">
       <DependentUpon>201903040326035_SeedUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903050002436_addparentField.cs" />
+    <Compile Include="Migrations\201903050002436_addparentField.Designer.cs">
+      <DependentUpon>201903050002436_addparentField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903050051104_addparentField1.cs" />
+    <Compile Include="Migrations\201903050051104_addparentField1.Designer.cs">
+      <DependentUpon>201903050051104_addparentField1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903050056529_revert.cs" />
+    <Compile Include="Migrations\201903050056529_revert.Designer.cs">
+      <DependentUpon>201903050056529_revert.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -271,15 +284,16 @@
     <Content Include="Views\Category\Index_Admin.cshtml" />
     <Content Include="Views\SubCategory\Index.cshtml" />
     <Content Include="Views\SubCategory\index_Admin.cshtml" />
-    <Content Include="Views\CategoryImages\Create.cshtml" />
     <Content Include="Views\CategoryImages\Delete.cshtml" />
-    <Content Include="Views\CategoryImages\Details.cshtml" />
-    <Content Include="Views\CategoryImages\Edit.cshtml" />
     <Content Include="Views\CategoryImages\Index.cshtml" />
+    <Content Include="Views\SubCategoryImages\Create.cshtml" />
+    <Content Include="Views\SubCategoryImages\Delete.cshtml" />
+    <Content Include="Views\SubCategoryImages\Edit.cshtml" />
+    <Content Include="Views\CategoryImages\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Images\" />
+    <Folder Include="Images\CategoryImages\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -306,6 +320,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903040326035_SeedUsers.resx">
       <DependentUpon>201903040326035_SeedUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903050002436_addparentField.resx">
+      <DependentUpon>201903050002436_addparentField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903050051104_addparentField1.resx">
+      <DependentUpon>201903050051104_addparentField1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903050056529_revert.resx">
+      <DependentUpon>201903050056529_revert.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

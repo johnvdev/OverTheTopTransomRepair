@@ -36,6 +36,7 @@
 
 
                     <div class="col-lg-12">
+                        @Html.ActionLink("Add/ Remove images", "Index", "CategoryImages", new{ id=category.id} , new { @class = "btn btn-primary" })
                         <div id="StructuralCarousel" class="carousel slide" data-ride="carousel">
 
                             <ol class="carousel-indicators">
@@ -73,7 +74,7 @@
                                         active = "item";
                                     }
                                     <div class="@active">
-                                        <img src="@Url.Content(img.Image)" value="@img.Image" />
+                                        <img src="@Url.Content(img.Image)" value="@img.Image"/>
                                     </div>
                                     im++;
                                 }

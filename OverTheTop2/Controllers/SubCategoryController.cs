@@ -21,6 +21,12 @@ namespace OverTheTop2.Controllers
         public ActionResult Index(int id)
         {
             var subCategory = _context.SubCategories.Include(c => c.SubCategoryImages).Single(i => i.Id == id);
+
+            if (User.IsInRole("Admin"))
+            {
+                return View("index_Admin",subCategory);
+            }
+
             return View(subCategory);
         }
     }

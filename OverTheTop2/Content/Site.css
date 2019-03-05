@@ -2,9 +2,7 @@
     font-family: 'Roboto', sans-serif !important;
     background: linear-gradient(0deg,rgba(0,0,0,0.70),rgba(0,0,0,0.70)), url(../Images/Background.jpg);
     font-family: 'Playfair Display', serif !important;
-    letter-spacing: 2px;
-    word-spacing: 3px;
-    line-height: 11px;
+
 }
 
 .btn-gallery {
@@ -44,7 +42,12 @@ a {
     }
 
 
-
+textarea{
+    color:black;
+    width:100%;
+    height:50vh;
+    font-size: 20px;
+}
 .container {
     width: 100%;
     padding: 30px;
@@ -262,3 +265,11 @@ input[type="select"] {
     font-display: auto;
     src: local('Arvo'), url(https://fonts.gstatic.com/s/arvo/v9/rC7kKhY-eUDY-ucISTIf5PesZW2xOQ-xsNqO47m55DA.woff2) format('woff2');
 }
+
+
+.squareImg {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+

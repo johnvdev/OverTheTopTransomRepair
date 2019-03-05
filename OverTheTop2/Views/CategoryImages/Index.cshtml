@@ -1,32 +1,32 @@
-﻿@model IEnumerable<OverTheTop2.Models.CategoryImage>
+﻿@model OverTheTop2.Models.Category
 
 @{
     ViewBag.Title = "Index";
 }
 
-<div class="card shadow">
+<div class="row card shadow">
     <p>
-        @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Add New Image", "Create",new {id = Model.id }, new {@class ="btn btn-default"})
     </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Image)
-            </th>
-            <th></th>
-        </tr>
 
-        @foreach (var item in Model) {
-            <tr>
-                <td>
-                    <img src="@Url.Content(item.Image)" />
-                </td>
-                <td>
-                    @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-                </td>
-            </tr>
-        }
 
-    </table>
+         
+               @{ var imgs = Model.CategoryImages.ToList();}
+            <div class="row">
+                @for (int i = 0; i < Model.CategoryImages.Count; i++)
+                {
+                    if (i > 0 && i % 4 == 0)
+                    {
+                        @:</div><div class="row">
+                    }
 
+                    <div class="col-md-3 card">
+                        
+                            <img src="@Url.Content(imgs[i].Image)" class="squareImg" />
+                       
+                        
+                        @Html.ActionLink("Delete", "Delete", new {imgId = imgs[i].Id, catId = Model.id}, new {@class = "btn btn-danger deleteImg", @onclick = "return confirm('Are you sure you want to delete?');"})
+                    </div>
+                }
+            </div>               
 </div>

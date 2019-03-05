@@ -9,5 +9,6 @@ namespace OverTheTop2.Models
     {
         public int Id { get; set; }
         public string Image { get; set; }
+        public virtual Category Parent { get; set; }
     }
 }
