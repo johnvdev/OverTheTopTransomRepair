@@ -14,106 +14,68 @@ namespace OverTheTop2.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: SubCategoryImages
-        public ActionResult Index()
+        [Authorize(Roles = "Admin")]
+        public ActionResult Add(int id)
         {
-            return View(db.SubCategoryImages.ToList());
+            var subCat = db.SubCategories.Single(i => i.Id == id);
+
+            return View(subCat);
         }
 
-        // GET: SubCategoryImages/Details/5
-        public ActionResult Details(int? id)
+        [Authorize(Roles = "Admin")]
+        public ActionResult Upload(IEnumerable<HttpPostedFileBase> Images, int id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            SubCategoryImage subCategoryImage = db.SubCategoryImages.Find(id);
-            if (subCategoryImage == null)
-            {
-                return HttpNotFound();
-            }
-            return View(subCategoryImage);
-        }
+            SubCategory Subcategory = db.SubCategories.Include(i => i.SubCategoryImages).Single(i => i.Id == id);
 
-        // GET: SubCategoryImages/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
 
-        // POST: SubCategoryImages/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,directory")] SubCategoryImage subCategoryImage)
-        {
-            if (ModelState.IsValid)
+            foreach (var file in Images)
             {
-                db.SubCategoryImages.Add(subCategoryImage);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+
+                if (file != null && file.ContentLength > 0)
+                {
+
+                    var path = Server.MapPath("~/Images/SubCategoryImages") + "/" + file.FileName;
+
+                    file.SaveAs(path);
+
+
+                    SubCategoryImage newImg = new SubCategoryImage()
+                    {
+                        directory = "~/Images/SubCategoryImages/"  + file.FileName
+                    };
+
+                    Subcategory.SubCategoryImages.Add(newImg);
+
+
+
+                    //handle files;
+                }
             }
 
-            return View(subCategoryImage);
+            db.SaveChanges();
+            return RedirectToAction("Details", "SubCategories", new { id = id });
         }
 
-        // GET: SubCategoryImages/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            SubCategoryImage subCategoryImage = db.SubCategoryImages.Find(id);
-            if (subCategoryImage == null)
-            {
-                return HttpNotFound();
-            }
-            return View(subCategoryImage);
-        }
 
-        // POST: SubCategoryImages/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,directory")] SubCategoryImage subCategoryImage)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(subCategoryImage).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(subCategoryImage);
-        }
+
+
 
         // GET: SubCategoryImages/Delete/5
-        public ActionResult Delete(int? id)
+        [Authorize(Roles = "Admin")]
+        public ActionResult Delete(int id, int subCAt)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
             SubCategoryImage subCategoryImage = db.SubCategoryImages.Find(id);
             if (subCategoryImage == null)
             {
                 return HttpNotFound();
             }
-            return View(subCategoryImage);
-        }
 
-        // POST: SubCategoryImages/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            SubCategoryImage subCategoryImage = db.SubCategoryImages.Find(id);
             db.SubCategoryImages.Remove(subCategoryImage);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", "SubCategories", new{id = subCAt });
         }
+
+     
 
         protected override void Dispose(bool disposing)
         {

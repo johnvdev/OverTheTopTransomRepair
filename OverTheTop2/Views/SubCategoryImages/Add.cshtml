@@ -1,0 +1,15 @@
+﻿@model OverTheTop2.Models.SubCategory
+
+@{
+    ViewBag.Title = "Create";
+}
+<div class="card shadow">
+    <h2>@Model.Name</h2>
+
+    @using (Html.BeginForm("Upload", "SubCategoryImages", new { id = Model.Id }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <input type="file" name="Images" multiple />
+        <button class="btn btn-default">Upload</button>
+    }
+
+</div>

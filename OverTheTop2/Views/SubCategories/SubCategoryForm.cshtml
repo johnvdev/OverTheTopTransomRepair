@@ -1,0 +1,29 @@
+﻿@model OverTheTop2.ViewModels.subCategoryFormViewModel
+@{
+    ViewBag.Title = "SubCategoryForm";
+}
+
+<div class="card shadow">
+
+
+    @using (Html.BeginForm("Save", "SubCategories", new { id = ViewData["CategoryId"] }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="form-group">
+            @Html.LabelFor(m => m.Name)
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Before)
+            <input name="Before" type="file">
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.After)
+            <input name="After" type="file">
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Images)
+            <input name="Images" type="file" multiple>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    }
+</div>

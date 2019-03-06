@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -178,7 +181,7 @@
     <Compile Include="Controllers\CategoryImagesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\SubCategoryController.cs" />
+    <Compile Include="Controllers\SubCategoriesController.cs" />
     <Compile Include="Controllers\SubCategoryImagesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -211,6 +214,18 @@
     <Compile Include="Migrations\201903050056529_revert.Designer.cs">
       <DependentUpon>201903050056529_revert.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903050626469_subcatimgBeforeAfter.cs" />
+    <Compile Include="Migrations\201903050626469_subcatimgBeforeAfter.Designer.cs">
+      <DependentUpon>201903050626469_subcatimgBeforeAfter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903050704510_subcatimgBeforeAfter1.cs" />
+    <Compile Include="Migrations\201903050704510_subcatimgBeforeAfter1.Designer.cs">
+      <DependentUpon>201903050704510_subcatimgBeforeAfter1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903060033199_requiredfields.cs" />
+    <Compile Include="Migrations\201903060033199_requiredfields.Designer.cs">
+      <DependentUpon>201903060033199_requiredfields.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -223,8 +238,11 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CategoryFormViewModel.cs" />
     <Compile Include="ViewModels\IndexFormViewModel.cs" />
+    <Compile Include="ViewModels\subCategoryFormViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="404.html" />
+    <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -235,6 +253,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\overthetoptransomrepair.ca - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -282,18 +301,22 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Category\CategoryForm.cshtml" />
     <Content Include="Views\Category\Index_Admin.cshtml" />
-    <Content Include="Views\SubCategory\Index.cshtml" />
-    <Content Include="Views\SubCategory\index_Admin.cshtml" />
     <Content Include="Views\CategoryImages\Delete.cshtml" />
     <Content Include="Views\CategoryImages\Index.cshtml" />
-    <Content Include="Views\SubCategoryImages\Create.cshtml" />
-    <Content Include="Views\SubCategoryImages\Delete.cshtml" />
     <Content Include="Views\SubCategoryImages\Edit.cshtml" />
     <Content Include="Views\CategoryImages\Create.cshtml" />
+    <Content Include="Views\SubCategories\Delete.cshtml" />
+    <Content Include="Views\SubCategories\Details.cshtml" />
+    <Content Include="Views\SubCategories\Edit.cshtml" />
+    <Content Include="Views\SubCategories\SubCategoryForm.cshtml" />
+    <Content Include="Views\SubCategories\Details_Admin.cshtml" />
+    <Content Include="Views\SubCategoryImages\Add.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Images\BeforeAfterImages\" />
     <Folder Include="Images\CategoryImages\" />
+    <Folder Include="Images\SubCategoryImages\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -329,6 +352,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903050056529_revert.resx">
       <DependentUpon>201903050056529_revert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903050626469_subcatimgBeforeAfter.resx">
+      <DependentUpon>201903050626469_subcatimgBeforeAfter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903050704510_subcatimgBeforeAfter1.resx">
+      <DependentUpon>201903050704510_subcatimgBeforeAfter1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903060033199_requiredfields.resx">
+      <DependentUpon>201903060033199_requiredfields.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

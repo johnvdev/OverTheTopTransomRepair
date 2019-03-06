@@ -11,6 +11,7 @@ using OverTheTop2.ViewModels;
 
 namespace OverTheTop2.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CategoryImagesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -40,17 +41,18 @@ namespace OverTheTop2.Controllers
 
             foreach (var file in myFiles)
             {
+
                 if (file != null && file.ContentLength > 0)
                 {
-                    var fileName = file.FileName;
-                    var path = Server.MapPath("~/Images/CategoryImages")+ "/"+fileName;
+                    var fileName = Guid.NewGuid();
+                    var path = Server.MapPath("~/Images/CategoryImages")+ "/"+fileName+ file.FileName;
 
                     file.SaveAs(path);
 
 
                     CategoryImage newImg = new CategoryImage()
                     {
-                        Image = "~/Images/CategoryImages/"+file.FileName
+                        Image = "~/Images/CategoryImages/" + fileName + file.FileName
                     };
                     
                     category.CategoryImages.Add(newImg);

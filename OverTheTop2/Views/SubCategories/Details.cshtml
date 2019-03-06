@@ -1,0 +1,40 @@
+﻿@model OverTheTop2.Models.SubCategory
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="row">
+    <h1 class="card shadow">@Model.Name</h1>
+    <div class="col-md-6">
+        <div class="card shadow">
+            <h1>Before</h1>
+            <img src="@Url.Content(Model.Beforeimg)" class="squareImg"/>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card shadow">
+            <h1>After</h1>
+            <img src="@Url.Content(Model.Afterimg)" class="squareImg"/>
+        </div>
+    </div>
+    @{ var imgs = Model.SubCategoryImages.ToList();}
+    <div class="row">
+        @for (int i = 0; i < Model.SubCategoryImages.Count; i++)
+        {
+            if (i > 0 && i % 4 == 0)
+            {
+                @:</div><div class="row">
+            }
+
+            <div class="col-md-3 ">
+                <div class="card shadow">
+                    <img src="@Url.Content(imgs[i].directory)" class="squareImg"/>
+                </div>
+
+
+
+            </div>
+        }
+    </div>
+</div>

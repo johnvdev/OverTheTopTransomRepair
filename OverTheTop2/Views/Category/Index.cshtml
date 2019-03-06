@@ -30,7 +30,7 @@
                     <ul class="list-group">
                         @foreach (var sub in category.SubCategory)
                         {
-                            @Html.ActionLink(sub.Name, "Index", "SubCategory", new { id = category.id }, new { @class = "list-group-item" })
+                            @Html.ActionLink(sub.Name, "Details", "SubCategories", new { id = sub.Id }, new { @class = "list-group-item" })
                         }
                     </ul>
 
