@@ -77,21 +77,21 @@ namespace OverTheTop2.Controllers
 
             var path = Server.MapPath("~/Images/BeforeAfterImages")+"/";
 
-            if (form.Before != null && exBefore != form.Before.FileName)
+            if (form.Before != null )
             {
-               
+                var guid = Guid.NewGuid();
                 System.IO.File.Delete(Server.MapPath(exBefore));
-                subInDb.Beforeimg = "~/Images/BeforeAfterImages/" + form.Before.FileName;
-                form.Before.SaveAs(path + form.Before.FileName);
+                subInDb.Beforeimg = "~/Images/BeforeAfterImages/"+ guid + form.Before.FileName;
+                form.Before.SaveAs(path+guid + form.Before.FileName);
 
 
             }
-            if (form.After != null && exAfter != form.After.FileName)
+            if (form.After != null)
             {
-                
+                var guid = Guid.NewGuid();
                 System.IO.File.Delete(Server.MapPath(exAfter));
-                subInDb.Afterimg = "~/Images/BeforeAfterImages/" + form.After.FileName;
-                form.After.SaveAs(path + form.After.FileName);
+                subInDb.Afterimg = "~/Images/BeforeAfterImages/"+guid + form.After.FileName;
+                form.After.SaveAs(path+guid + form.After.FileName);
             }
 
             if (subInDb.Name != form.Name)
@@ -124,15 +124,15 @@ namespace OverTheTop2.Controllers
                 var path = Server.MapPath("~/Images/BeforeAfterImages") + "/";
                 if (before != null && before.ContentLength > 0)
                 {
-
-                    before.SaveAs(path  + form.Before.FileName);
-                    subCategory.Beforeimg = "~/Images/BeforeAfterImages/" + form.Before.FileName;
+                    var guid = Guid.NewGuid();
+                    before.SaveAs(path+ guid + form.Before.FileName);
+                    subCategory.Beforeimg = "~/Images/BeforeAfterImages/"+ guid + form.Before.FileName;
                 }
                 if (after != null && after.ContentLength > 0)
                 {
-
-                    after.SaveAs(path + form.After.FileName);
-                    subCategory.Afterimg = "~/Images/BeforeAfterImages/" + form.After.FileName;
+                    var guid = Guid.NewGuid();
+                    after.SaveAs(path +guid+ form.After.FileName);
+                    subCategory.Afterimg = "~/Images/BeforeAfterImages/"+guid + form.After.FileName;
                 }
                 category.SubCategory.Add(subCategory);
                 db.SaveChanges();
@@ -144,17 +144,18 @@ namespace OverTheTop2.Controllers
                 path = Server.MapPath("~/Images/SubCAtegoryImages") + "/";
                 foreach (var file in form.Images)
                 {
+                    var guid = Guid.NewGuid();
                     if (file != null && file.ContentLength > 0)
                     {
 
-                        path = Server.MapPath("~/Images/SubCategoryImages") + "/" + file.FileName;
+                        path = Server.MapPath("~/Images/SubCategoryImages") + "/" + guid+ file.FileName;
 
                         file.SaveAs(path);
 
 
                         SubCategoryImage newImg = new SubCategoryImage()
                         {
-                            directory = "~/Images/SubCategoryImages/"  + file.FileName
+                            directory = "~/Images/SubCategoryImages/"+guid  + file.FileName
                         };
                         subCategoryIns.SubCategoryImages.Add(newImg);
 

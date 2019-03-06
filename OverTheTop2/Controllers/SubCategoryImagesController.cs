@@ -30,18 +30,18 @@ namespace OverTheTop2.Controllers
 
             foreach (var file in Images)
             {
-
+                var guid = Guid.NewGuid();
                 if (file != null && file.ContentLength > 0)
                 {
 
-                    var path = Server.MapPath("~/Images/SubCategoryImages") + "/" + file.FileName;
+                    var path = Server.MapPath("~/Images/SubCategoryImages") + "/" +guid+ file.FileName;
 
                     file.SaveAs(path);
 
 
                     SubCategoryImage newImg = new SubCategoryImage()
                     {
-                        directory = "~/Images/SubCategoryImages/"  + file.FileName
+                        directory = "~/Images/SubCategoryImages/"  +guid+ file.FileName
                     };
 
                     Subcategory.SubCategoryImages.Add(newImg);
