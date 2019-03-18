@@ -168,7 +168,7 @@ namespace OverTheTop2.Controllers
                 db.SaveChanges();
 
 
-                return RedirectToAction("Index","Category");
+                return RedirectToAction("Index","Home");
             }
 
             return View();

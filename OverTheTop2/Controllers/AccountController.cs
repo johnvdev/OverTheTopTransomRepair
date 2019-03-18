@@ -398,7 +398,7 @@ namespace OverTheTop2.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Category");
+            return RedirectToAction("Index", "Home");
         }
 
         //
@@ -455,7 +455,7 @@ namespace OverTheTop2.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Category");
+            return RedirectToAction("Index", "Home");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

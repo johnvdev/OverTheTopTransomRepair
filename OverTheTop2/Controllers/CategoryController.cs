@@ -19,20 +19,7 @@ namespace OverTheTop2.Controllers
             _context = new ApplicationDbContext();
         }
 
-        public ActionResult Index()
-        {
-            var categories = _context.Categories.Include(c => c.SubCategory).Include(c => c.CategoryImages).ToList();
-
-            if (User.IsInRole("Admin"))
-            {
-                return View("Index_Admin",categories);
-            }
-            else
-            {
-                return View("Index", categories);
-            }
-            
-        }
+    
 
         [Authorize(Roles = "Admin")]
         public ActionResult New()
@@ -59,7 +46,7 @@ namespace OverTheTop2.Controllers
             }
 
             _context.SaveChanges();
-            return RedirectToAction("Index", "Category");
+            return RedirectToAction("Index", "Home");
         }
 
         [Authorize(Roles = "Admin")]

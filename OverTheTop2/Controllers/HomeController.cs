@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using OverTheTop2.ViewModels;
 
 namespace OverTheTop2.Controllers
 {
@@ -20,8 +21,25 @@ namespace OverTheTop2.Controllers
 
         public ActionResult Index()
         {
-            var categories = _context.Categories.Include(c=>c.SubCategory).Include(c=>c.CategoryImages).ToList();
-            return View(categories);
+
+            var categories = _context.Categories.Include(c => c.SubCategory).Include(c => c.CategoryImages).ToList();
+            var reviews = _context.Reviews;
+
+            IndexFormViewModel viewModel = new IndexFormViewModel
+            {
+                Categories = categories,
+                Reviews = reviews
+            };
+
+            if (User.IsInRole("Admin"))
+            {
+                return View("Index_Admin", viewModel);
+            }
+            else
+            {
+                return View("Index", viewModel);
+            }
+
         }
 
         public ActionResult About()

@@ -17,7 +17,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            @Html.ActionLink("Over The Top Transom Repair", "Index", "Category", new { area = "" }, new { @class = "navbar-brand" })
+            @Html.ActionLink("Over The Top Transom Repair", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -33,13 +33,14 @@
 
        
 </div>
-<footer>
+<footer class="footer">
     <p>&copy; @DateTime.Now.Year - Over The Top Transom Repair</p>
 </footer>
 
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/bootstrap")
 @RenderSection("scripts", required: false)
+
 <script>
     window.onscroll = function() {scrollFunction()};
 
@@ -51,6 +52,7 @@
         }
     } 
 </script>
+
 </body>
 
 </html>

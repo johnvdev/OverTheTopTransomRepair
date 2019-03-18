@@ -8,8 +8,8 @@ namespace OverTheTop2.ViewModels
 {
     public class IndexFormViewModel
     {
-        private IEnumerable<SubCategory> SubCategories { get; set; }
-        public IEnumerable<CategoryImage> CategoryImages { get; set; }
-        public Category Category { get; set; }
+        public IEnumerable<Category> Categories { get; set; }
+        public IEnumerable<Review> Reviews { get; set; }
+
     }
 }

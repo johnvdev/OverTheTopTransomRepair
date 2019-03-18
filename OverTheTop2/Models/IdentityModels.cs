@@ -24,6 +24,8 @@ namespace OverTheTop2.Models
         public DbSet<Category> Categories { get; set; }
         public DbSet<SubCategory> SubCategories { get; set; }
         public DbSet<CategoryImage> CategoryImages { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+
 
 
         public ApplicationDbContext()
