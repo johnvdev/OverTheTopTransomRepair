@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using System.Net.Mime;
 using OverTheTop2.ViewModels;
 
 namespace OverTheTop2.Controllers
@@ -17,6 +18,12 @@ namespace OverTheTop2.Controllers
         public HomeController()
         {
             _context =new ApplicationDbContext();
+        }
+
+        public ActionResult SiteMap()
+        {
+            string xml = System.IO.File.ReadAllText(Server.MapPath("~/web.sitemap"));
+            return Content(xml,MediaTypeNames.Text.Xml);
         }
 
         public ActionResult Index()

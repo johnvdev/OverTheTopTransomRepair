@@ -18,6 +18,11 @@ namespace OverTheTop2
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+                "Sitemap",
+                "sitemap.xml",
+                new { controller = "Home", action = "SiteMap" }
+            );
         }
     }
 }
